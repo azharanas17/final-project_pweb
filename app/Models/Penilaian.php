@@ -19,7 +19,7 @@ class Penilaian extends Model
 
     public function pelajaran()
     {
-        return $this->belongsTo(MataPelajaran::class);
+        return $this->belongsTo(MataPelajaran::class, 'mata_pelajaran_id');
     }
 
     public function guru()

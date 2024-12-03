@@ -42,9 +42,6 @@ class PresensiController extends Controller
     public function update(Request $request, Presensi $presensi)
     {
         $request->validate([
-            'murid_id' => 'required',
-            'jadwal_id' => 'required',
-            'tanggal' => 'required|date',
             'status' => 'required'
         ]);
 

@@ -13,29 +13,27 @@ class PenilaianController extends Controller
 {
     public function index()
     {
-        // $penilaians = DB::table('penilaian')
-        // ->join('murid', 'penilaian.murid_id', '=', 'murid.id')
-        // ->join('mata_pelajaran', 'penilaian.mata_pelajaran_id', '=', 'mata_pelajaran.id')
-        // ->join('guru', 'penilaian.guru_id', '=', 'guru.id')
-        // ->select('penilaian.*', 'murid.nama as murid_nama', 'mata_pelajaran.nama as mata_pelajaran_nama', 'guru.nama as guru_nama')
-        // ->get();
-
-        $penilaians = Penilaian::all();
+        $penilaians = Penilaian::with(['murid', 'pelajaran', 'guru'])->paginate(10);
         return view('penilaian.index', compact('penilaians'));
     }
 
     public function create()
     {
-        $murid = Murid::all();
-        return view('penilaian.create', compact('murid'));
+        $murids = Murid::all();
+        $mataPelajarans = MataPelajaran::all();
+        $gurus = Guru::all();
+        return view('penilaian.create', compact('murids', 'mataPelajarans', 'gurus'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'murid_id' => 'required',
-            'jadwal_id' => 'required',
-            'nilai' => 'required|numeric|min:0|max:100'
+            'mata_pelajaran_id' => 'required',
+            'guru_id' => 'required',
+            'nilai' => 'required|numeric|min:0|max:100',
+            'deskripsi' => 'required',
+            'tanggal' => 'required|date'
         ]);
 
         Penilaian::create($request->all());
@@ -52,8 +50,11 @@ class PenilaianController extends Controller
     {
         $request->validate([
             'murid_id' => 'required',
-            'jadwal_id' => 'required',
-            'nilai' => 'required|numeric|min:0|max:100'
+            'mata_pelajaran_id' => 'required',
+            'guru_id' => 'required',
+            'nilai' => 'required|numeric|min:0|max:100',
+            'deskripsi' => 'required',
+            'tanggal' => 'required|date'
         ]);
 
         $penilaian->update($request->all());
