@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jadwal', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
-            $table->string('mata_pelajaran');
+            $table->foreignId('mata_pelajaran_id')->constrained('mata_pelajaran')->onDelete('cascade');
             $table->unsignedBigInteger('guru_id')->nullable();
             $table->foreign('guru_id')->references('id')->on('guru')->onDelete('set null');
             $table->string('hari');

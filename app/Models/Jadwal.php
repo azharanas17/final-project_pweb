@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Guru;
 use App\Models\Murid;
+use App\Models\MataPelajaran;
+use App\Models\Kelas;
 
 class Jadwal extends Model
 {
@@ -19,5 +21,15 @@ class Jadwal extends Model
     public function murid()
     {
         return $this->belongsToMany(Murid::class, 'presensi', 'jadwal_id', 'murid_id');
+    }
+
+    public function pelajaran()
+    {
+        return $this->belongsTo(MataPelajaran::class, 'mata_pelajaran_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
     }
 }

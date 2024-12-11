@@ -40,21 +40,24 @@ class PenilaianController extends Controller
         return redirect()->route('penilaian.index')->with('success', 'Penilaian recorded successfully.');
     }
 
-    public function edit(Penilaian $penilaian)
+    public function edit($id)
     {
-        $murid = Murid::all();
-        return view('penilaian.edit', compact('penilaian', 'murid'));
+        $penilaian = Penilaian::findOrFail($id);
+        $murids = Murid::all();
+        $mataPelajarans = MataPelajaran::all();
+
+        return view('penilaian.edit', compact('penilaian', 'murids', 'mataPelajarans'));
     }
 
     public function update(Request $request, Penilaian $penilaian)
     {
         $request->validate([
-            'murid_id' => 'required',
-            'mata_pelajaran_id' => 'required',
-            'guru_id' => 'required',
+            // 'murid_id' => 'required',
+            // 'mata_pelajaran_id' => 'required',
+            // 'guru_id' => 'required',
             'nilai' => 'required|numeric|min:0|max:100',
-            'deskripsi' => 'required',
-            'tanggal' => 'required|date'
+            // 'deskripsi' => 'required',
+            // 'tanggal' => 'required|date'
         ]);
 
         $penilaian->update($request->all());

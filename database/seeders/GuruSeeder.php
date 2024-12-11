@@ -13,20 +13,19 @@ class GuruSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        $faker = Faker::create();
-        $mataPelajaran = MataPelajaran::all();
+        $guru = [
+            ['nama' => 'Budi Santoso', 'nip' => '10021201', 'email' => 'budi@example.com', 'mata_pelajaran_id' => 1],
+            ['nama' => 'Ani Setiani', 'nip' => '10021202', 'email' => 'ani@example.com', 'mata_pelajaran_id' => 2],
+            ['nama' => 'Rudi Hartono', 'nip' => '10021203', 'email' => 'rudi@example.com', 'mata_pelajaran_id' => 3],
+            ['nama' => 'Siti Rahmawati', 'nip' => '10021205', 'email' => 'siti@example.com', 'mata_pelajaran_id' => 4],
+            ['nama' => 'Andi Permana', 'nip' => '10021207', 'email' => 'andi@example.com', 'mata_pelajaran_id' => 5],
+            ['nama' => 'Lina Kusuma', 'nip' => '10021211', 'email' => 'lina@example.com', 'mata_pelajaran_id' => 6],
+        ];
 
-        // Membuat 10 data guru
-        foreach (range(1, 10) as $index) {
-            Guru::create([
-                'nama' => $faker->name,
-                'nip' => $faker->unique()->numerify('###########'),
-                'email' => $faker->unique()->safeEmail,
-                'telepon' => $faker->phoneNumber,
-                'mata_pelajaran_id' => $mataPelajaran->random()->id,
-            ]);
+        foreach ($guru as $dataGuru) {
+            Guru::create($dataGuru);
         }
     }
 }

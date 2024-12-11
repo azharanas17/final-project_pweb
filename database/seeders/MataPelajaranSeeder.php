@@ -11,11 +11,19 @@ class MataPelajaranSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        MataPelajaran::create(['nama' => 'Matematika', 'deskripsi' => 'Pelajaran tentang angka dan rumus-rumus']);
-        MataPelajaran::create(['nama' => 'Bahasa Indonesia', 'deskripsi' => 'Pelajaran tentang bahasa Indonesia']);
-        MataPelajaran::create(['nama' => 'Fisika', 'deskripsi' => 'Pelajaran tentang fisika dan hukum alam']);
-        MataPelajaran::create(['nama' => 'Kimia', 'deskripsi' => 'Pelajaran tentang materi dan reaksi kimia']);
+        $mataPelajaran = [
+            ['nama' => 'Matematika'],
+            ['nama' => 'Bahasa Indonesia'],
+            ['nama' => 'Bahasa Inggris'],
+            ['nama' => 'Fisika'],
+            ['nama' => 'Kimia'],
+            ['nama' => 'Biologi'],
+        ];
+
+        foreach ($mataPelajaran as $pelajaran) {
+            MataPelajaran::create($pelajaran);
+        }
     }
 }

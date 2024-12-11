@@ -15,20 +15,17 @@ class PresensiSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        $murid = Murid::all();
-        $jadwal = Jadwal::all();
+        $presensis = [
+            ['murid_id' => 1, 'jadwal_id' => 1, 'status' => 'Hadir', 'tanggal' => '2024-12-01'],
+            ['murid_id' => 2, 'jadwal_id' => 1, 'status' => 'Alpa', 'tanggal' => '2024-12-01'],
+            ['murid_id' => 3, 'jadwal_id' => 2, 'status' => 'Sakit', 'tanggal' => '2024-12-02'],
+            ['murid_id' => 4, 'jadwal_id' => 2, 'status' => 'Izin', 'tanggal' => '2024-12-02'],
+        ];
 
-        // Membuat 200 presensi
-        foreach (range(1, 200) as $index) {
-            Presensi::create([
-                'murid_id' => $murid->random()->id,
-                'jadwal_id' => $jadwal->random()->id,
-                'tanggal' => Carbon::today()->subDays(rand(0, 10)),
-                'status' => ['hadir', 'izin', 'sakit', 'alpa'][rand(0, 3)],
-                'catatan' => 'Catatan presensi pada tanggal ' . Carbon::today()->subDays(rand(0, 10))->toDateString(),
-            ]);
+        foreach ($presensis as $presensi) {
+            Presensi::create($presensi);
         }
     }
 }

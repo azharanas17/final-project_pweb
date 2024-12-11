@@ -13,21 +13,19 @@ class MuridSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        $faker = Faker::create();
-        $kelas = Kelas::all();
+        $murid = [
+            ['nama' => 'Ahmad Fauzi', 'nis' => '20021201', 'email' => 'ahmad@example.com', 'kelas_id' => 1],
+            ['nama' => 'Budi Santoso', 'nis' => '20021202', 'email' => 'budisan@example.com', 'kelas_id' => 1],
+            ['nama' => 'Citra Dewi', 'nis' => '20021203', 'email' => 'citra@example.com', 'kelas_id' => 2],
+            ['nama' => 'Dewi Kartika', 'nis' => '20021204', 'email' => 'dewi@example.com', 'kelas_id' => 2],
+            ['nama' => 'Eka Prasetya', 'nis' => '20021206', 'email' => 'eka@example.com', 'kelas_id' => 3],
+            ['nama' => 'Farhan Maulana', 'nis' => '20021208', 'email' => 'farhan@example.com', 'kelas_id' => 3],
+        ];
 
-        // Membuat 50 murid dengan data dummy
-        foreach (range(1, 50) as $index) {
-            Murid::create([
-                'nama' => $faker->name,
-                'nis' => $faker->unique()->numerify('##########'),
-                'email' => $faker->unique()->safeEmail,
-                'telepon' => $faker->phoneNumber,
-                'alamat' => $faker->address,
-                'kelas_id' => $kelas->random()->id,
-            ]);
+        foreach ($murid as $dataMurid) {
+            Murid::create($dataMurid);
         }
     }
 }

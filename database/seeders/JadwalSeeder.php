@@ -14,27 +14,19 @@ class JadwalSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        $faker = Faker::create();
-        $kelas = Kelas::all();
-        $guru = Guru::all();
+        $jadwals = [
+            ['kelas_id' => 1, 'guru_id' => 1, 'mata_pelajaran_id' => 1, 'hari' => 'Senin', 'waktu_mulai' => '08:00', 'waktu_selesai' => '10:00'],
+            ['kelas_id' => 1, 'guru_id' => 2, 'mata_pelajaran_id' => 2, 'hari' => 'Selasa', 'waktu_mulai' => '09:00', 'waktu_selesai' => '11:00'],
+            ['kelas_id' => 2, 'guru_id' => 3, 'mata_pelajaran_id' => 3, 'hari' => 'Rabu', 'waktu_mulai' => '08:00', 'waktu_selesai' => '10:00'],
+            ['kelas_id' => 2, 'guru_id' => 4, 'mata_pelajaran_id' => 4, 'hari' => 'Kamis', 'waktu_mulai' => '10:00', 'waktu_selesai' => '12:00'],
+            ['kelas_id' => 3, 'guru_id' => 5, 'mata_pelajaran_id' => 5, 'hari' => 'Jumat', 'waktu_mulai' => '08:00', 'waktu_selesai' => '10:00'],
+            ['kelas_id' => 3, 'guru_id' => 6, 'mata_pelajaran_id' => 6, 'hari' => 'Sabtu', 'waktu_mulai' => '08:00', 'waktu_selesai' => '10:00'],
+        ];
 
-        // Membuat 30 jadwal untuk setiap kelas
-        foreach ($kelas as $k) {
-            foreach ($guru as $g) {
-                // Membuat 5 jadwal untuk setiap kelas
-                foreach (range(1, 5) as $index) {
-                    Jadwal::create([
-                        'kelas_id' => $k->id,
-                        'mata_pelajaran' => $g->mata_pelajaran_id,
-                        'guru_id' => $g->id,
-                        'hari' => $faker->dayOfWeek,
-                        'waktu_mulai' => $faker->time('H:i:s'),
-                        'waktu_selesai' => $faker->time('H:i:s'),
-                    ]);
-                }
-            }
+        foreach ($jadwals as $jadwal) {
+            Jadwal::create($jadwal);
         }
     }
 }

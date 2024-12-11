@@ -11,37 +11,19 @@ class KelasSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        // Membuat 6 kelas
-        Kelas::create([
-            'nama' => 'X-A',
-            'deskripsi' => 'Kelas 10-A, IPA',
-        ]);
+        $kelas = [
+            ['nama' => '10A', 'wali_kelas_id' => 1],
+            ['nama' => '10B', 'wali_kelas_id' => 2],
+            ['nama' => '11A', 'wali_kelas_id' => 3],
+            ['nama' => '11B', 'wali_kelas_id' => 4],
+            ['nama' => '12A', 'wali_kelas_id' => 5],
+            ['nama' => '12B', 'wali_kelas_id' => 6],
+        ];
 
-        Kelas::create([
-            'nama' => 'X-B',
-            'deskripsi' => 'Kelas 10-B, IPA',
-        ]);
-
-        Kelas::create([
-            'nama' => 'X-C',
-            'deskripsi' => 'Kelas 10-C, IPS',
-        ]);
-
-        Kelas::create([
-            'nama' => 'XI-A',
-            'deskripsi' => 'Kelas 11-A, IPA',
-        ]);
-
-        Kelas::create([
-            'nama' => 'XI-B',
-            'deskripsi' => 'Kelas 11-B, IPS',
-        ]);
-
-        Kelas::create([
-            'nama' => 'XII-A',
-            'deskripsi' => 'Kelas 12-A, IPA',
-        ]);
+        foreach ($kelas as $dataKelas) {
+            Kelas::create($dataKelas);
+        }
     }
 }

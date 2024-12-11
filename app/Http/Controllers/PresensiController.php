@@ -5,19 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Presensi;
 use App\Models\Murid;
+use App\Models\Jadwal;
+use App\Models\MataPelajaran;
 
 class PresensiController extends Controller
 {
     public function index()
     {
-        $presensis = Presensi::with('murid')->get();
-        return view('presensi.index', compact('presensis'));
+        $jadwals = Jadwal::with('pelajaran', 'guru', 'kelas')->get();
+
+        return view('presensi.index', compact('jadwals'));
+    }
+
+    public function show($jadwalId)
+    {
+        $presensis = Presensi::with('murid')
+            ->where('jadwal_id', $jadwalId)
+            ->get();
+
+        $jadwal = Jadwal::with('pelajaran', 'guru', 'kelas')->findOrFail($jadwalId);
+
+        return view('presensi.show', compact('presensis', 'jadwal'));
     }
 
     public function create()
     {
-        $murid = Murid::all();
-        return view('presensi.create', compact('murid'));
+        $jadwals = Jadwal::with(['kelas', 'pelajaran'])->get();
+        $murids = Murid::all();
+        $mataPelajarans = MataPelajaran::all();
+
+        return view('presensi.create', compact('jadwals', 'murids', 'mataPelajarans'));
     }
 
     public function store(Request $request)
@@ -25,6 +42,7 @@ class PresensiController extends Controller
         $request->validate([
             'murid_id' => 'required',
             'jadwal_id' => 'required',
+            'mata_pelajaran_id' => 'required',
             'tanggal' => 'required|date',
             'status' => 'required'
         ]);

@@ -16,25 +16,16 @@ class PenilaianSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        $murids = Murid::all();
-        $mataPelajarans = MataPelajaran::all();
-        $gurus = Guru::all();
+        $penilaians = [
+            ['murid_id' => 1, 'mata_pelajaran_id' => 1, 'guru_id' => 1, 'nilai' => 85, 'deskripsi' => 'Baik', 'tanggal' => '2024-12-01'],
+            ['murid_id' => 2, 'mata_pelajaran_id' => 2, 'guru_id' => 2, 'nilai' => 75, 'deskripsi' => 'Cukup', 'tanggal' => '2024-12-02'],
+            ['murid_id' => 3, 'mata_pelajaran_id' => 3, 'guru_id' => 3, 'nilai' => 90, 'deskripsi' => 'Sangat Baik', 'tanggal' => '2024-12-03'],
+        ];
 
-        foreach ($murids as $murid) {
-            foreach ($mataPelajarans as $mataPelajaran) {
-                foreach ($gurus as $guru) {
-                    Penilaian::create([
-                        'murid_id' => $murid->id,
-                        'mata_pelajaran_id' => $mataPelajaran->id,
-                        'guru_id' => $guru->id,
-                        'nilai' => rand(60, 100),
-                        'deskripsi' => 'Penilaian untuk mata pelajaran ' . $mataPelajaran->nama,
-                        'tanggal' => now(),
-                    ]);
-                }
-            }
+        foreach ($penilaians as $penilaian) {
+            Penilaian::create($penilaian);
         }
     }
 }
