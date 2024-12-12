@@ -7,7 +7,6 @@ use App\Models\Penilaian;
 use App\Models\Murid;
 use App\Models\MataPelajaran;
 use App\Models\Guru;
-use Illuminate\Support\Facades\DB;
 
 class PenilaianController extends Controller
 {

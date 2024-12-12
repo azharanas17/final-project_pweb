@@ -26,7 +26,7 @@
 
                     <!-- Tabel Penilaian -->
                     <table class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-700">
-                        <thead>
+                        <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
                                 <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Nama Murid</th>
                                 <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Mata Pelajaran</th>
@@ -35,7 +35,7 @@
                                 <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($penilaians as $penilaian)
                             <tr>
                                 <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">{{ $penilaian->murid->nama }}</td>
@@ -45,7 +45,7 @@
                                 <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2 text-center">
                                     <!-- Tombol Edit -->
                                     <a href="{{ route('penilaian.edit', $penilaian->id) }}" 
-                                       class="text-gray-500 dark:text-gray-300 font-semibold hover:underline">
+                                        class="inline-block bg-yellow-500 text-white font-semibold py-1 px-3 rounded hover:underline">
                                         Edit
                                     </a>
 
@@ -55,7 +55,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 
-                                                class="text-red-500 font-semibold hover:underline">
+                                            class="inline-block bg-red-500 text-white font-semibold py-1 px-3 rounded hover:underline">
                                             Hapus
                                         </button>
                                     </form>
