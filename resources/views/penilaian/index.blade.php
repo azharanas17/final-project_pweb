@@ -14,51 +14,29 @@
                     Tambah Penilaian
                 </a>
             </div>
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            
+            <div class="mb-4 flex justify-between items-center">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-gray-200">Daftar Penilaian Berdasarkan Mata Pelajaran</h3>
+            </div>
+            <!-- Tabel Berdasarkan Mata Pelajaran -->
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6 bg-white dark:bg-gray-800">
-                    {{-- <div class="mb-6">
-                        <!-- Tombol Tambah Penilaian -->
-                        <a href="{{ route('penilaian.create') }}" 
-                           class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">
-                            Tambah Penilaian
-                        </a>
-                    </div> --}}
-
-                    <!-- Tabel Penilaian -->
                     <table class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
-                                <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Nama Murid</th>
                                 <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Mata Pelajaran</th>
-                                <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Nilai</th>
-                                <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Tanggal</th>
                                 <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            @foreach ($penilaians as $penilaian)
+                            @foreach ($penilaiansByPelajaran as $mataPelajaranId => $penilaians)
                             <tr>
-                                <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">{{ $penilaian->murid->nama }}</td>
-                                <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">{{ $penilaian->pelajaran->nama }}</td>
-                                <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">{{ $penilaian->nilai }}</td>
-                                <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">{{ $penilaian->tanggal }}</td>
+                                <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">{{ $penilaians->first()->pelajaran->nama }}</td>
                                 <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2 text-center">
-                                    <!-- Tombol Edit -->
-                                    <a href="{{ route('penilaian.edit', $penilaian->id) }}" 
-                                        class="inline-block bg-yellow-500 text-white font-semibold py-1 px-3 rounded hover:underline">
-                                        Edit
+                                    <a href="{{ route('penilaian.show', ['mata_pelajaran_id' => $penilaians->first()->pelajaran->id]) }}" 
+                                       class="inline-block bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:underline">
+                                       Lihat Penilaian
                                     </a>
-
-                                    <!-- Tombol Delete -->
-                                    <form action="{{ route('penilaian.destroy', $penilaian->id) }}" method="POST" 
-                                          class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus penilaian ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                            class="inline-block bg-red-500 text-white font-semibold py-1 px-3 rounded hover:underline">
-                                            Hapus
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -66,6 +44,37 @@
                     </table>
                 </div>
             </div>
+
+            <div class="mb-4 flex justify-between items-center">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-gray-200">Daftar Penilaian Berdasarkan Murid</h3>
+            </div>
+            <!-- Tabel Berdasarkan Murid -->
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white dark:bg-gray-800">
+                    <table class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Nama Murid</th>
+                                <th class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            @foreach ($penilaiansByMurid as $muridId => $penilaians)
+                            <tr>
+                                <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2">{{ $penilaians->first()->murid->nama }}</td>
+                                <td class="border border-gray-300 text-gray-500 dark:text-gray-300 px-4 py-2 text-center">
+                                    <a href="{{ route('penilaian.show', ['murid_id' => $penilaians->first()->murid->id]) }}" 
+                                       class="inline-block bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:underline">
+                                       Lihat Penilaian
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 </x-app-layout>

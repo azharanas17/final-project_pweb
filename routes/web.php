@@ -27,7 +27,15 @@ Route::middleware('auth')->group(function () {
     // Route::put('/presensi/{id}', [PresensiController::class, 'update']);
     // Route::delete('/presensi/{id}', [PresensiController::class, 'destroy']);
     
-    Route::resource('penilaian', PenilaianController::class);
+    // Route::resource('penilaian', PenilaianController::class);
+    Route::get('/penilaian', [PenilaianController::class, 'index'])->name('penilaian.index');
+    Route::get('/penilaian/create', [PenilaianController::class, 'create'])->name('penilaian.create');
+    Route::post('/penilaian', [PenilaianController::class, 'store'])->name('penilaian.store');
+    Route::get('/penilaian/show', [PenilaianController::class, 'show'])->name('penilaian.show');
+    Route::get('/penilaian/{penilaian}/edit', [PenilaianController::class, 'edit'])->name('penilaian.edit');
+    Route::put('/penilaian/{penilaian}', [PenilaianController::class, 'update'])->name('penilaian.update');
+    Route::delete('/penilaian/{penilaian}', [PenilaianController::class, 'destroy'])->name('penilaian.destroy');
+
 });
 
 require __DIR__.'/auth.php';

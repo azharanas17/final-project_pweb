@@ -73,7 +73,6 @@
                             <input type="date" name="tanggal" id="tanggal" class="block w-full mt-1 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700" value="{{ old('tanggal') }}">
                         </div>
 
-                        <!-- Tombol Simpan -->
                         <div class="flex justify-end">
                             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                                 Simpan

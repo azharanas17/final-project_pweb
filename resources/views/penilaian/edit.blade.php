@@ -14,28 +14,24 @@
                         @method('PUT')
 
                         <div class="space-y-4">
-                            <!-- Nama Murid (readonly) -->
                             <div>
                                 <label for="murid_id" class="block font-semibold text-gray-700">Nama Murid</label>
                                 <input type="text" value="{{ $penilaian->murid->nama }}" 
                                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md bg-gray-200 text-gray-600" readonly>
                             </div>
 
-                            <!-- Mata Pelajaran (readonly) -->
                             <div>
                                 <label for="mata_pelajaran_id" class="block font-semibold text-gray-700">Mata Pelajaran</label>
                                 <input type="text" value="{{ $penilaian->pelajaran->nama }}" 
                                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md bg-gray-200 text-gray-600" readonly>
                             </div>
 
-                            <!-- Tanggal (readonly) -->
                             <div>
                                 <label for="tanggal" class="block font-semibold text-gray-700">Tanggal</label>
                                 <input type="text" value="{{ $penilaian->tanggal }}" 
                                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md bg-gray-200 text-gray-600" readonly>
                             </div>
 
-                            <!-- Nilai (editable) -->
                             <div>
                                 <label for="nilai" class="block font-semibold text-gray-700">Nilai</label>
                                 <input type="number" name="nilai" id="nilai" 
@@ -43,7 +39,6 @@
                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
                             </div>
 
-                            <!-- Tombol Submit -->
                             <div class="mt-6">
                                 <button type="submit" 
                                         class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">
@@ -53,7 +48,6 @@
                         </div>
                     </form>
 
-                    <!-- Tombol Cancel -->
                     <div class="mt-4">
                         <a href="{{ route('penilaian.index') }}" 
                            class="text-gray-600 hover:text-gray-800">

@@ -7,13 +7,29 @@ use App\Models\Penilaian;
 use App\Models\Murid;
 use App\Models\MataPelajaran;
 use App\Models\Guru;
+use Illuminate\Support\Facades\DB;
 
 class PenilaianController extends Controller
 {
     public function index()
     {
-        $penilaians = Penilaian::with(['murid', 'pelajaran', 'guru'])->paginate(10);
-        return view('penilaian.index', compact('penilaians'));
+        $penilaiansByPelajaran = Penilaian::with(['murid', 'pelajaran'])->get()->groupBy('mata_pelajaran_id');
+        $penilaiansByMurid = Penilaian::with(['murid', 'pelajaran'])->get()->groupBy('murid_id');
+
+        return view('penilaian.index', compact('penilaiansByPelajaran', 'penilaiansByMurid'));
+    }
+
+    public function show(Request $request)
+    {
+        if ($request->has('mata_pelajaran_id')) {
+            $penilaians = Penilaian::where('mata_pelajaran_id', $request->mata_pelajaran_id)->get();
+        } elseif ($request->has('murid_id')) {
+            $penilaians = Penilaian::where('murid_id', $request->murid_id)->get();
+        } else {
+            return redirect()->route('penilaian.index');
+        }
+    
+        return view('penilaian.show', compact('penilaians'));
     }
 
     public function create()
@@ -31,7 +47,7 @@ class PenilaianController extends Controller
             'mata_pelajaran_id' => 'required',
             'guru_id' => 'required',
             'nilai' => 'required|numeric|min:0|max:100',
-            'deskripsi' => 'required',
+            // 'deskripsi' => 'required',
             'tanggal' => 'required|date'
         ]);
 
